@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker,DeclarativeBase
 #link of database
 from src.config import settings
 
-Engine = create_engine(settings.databse_url)
+Engine = create_engine(settings.database_url)
 
 class Base(DeclarativeBase):
     pass
