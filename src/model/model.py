@@ -34,6 +34,7 @@ class Book(Base):
     pdf_url: Mapped[str] = mapped_column()
     number_page: Mapped[int] = mapped_column()
     created_at: Mapped[str] = mapped_column()
+    book_cover_image_url: Mapped[str] = mapped_column()
     category_id: Mapped[int] = mapped_column(ForeignKey("librery_system.category.id"))
     #relationship
     Book: Mapped["Category"] = relationship(back_populates="book",uselist=False)
