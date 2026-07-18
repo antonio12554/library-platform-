@@ -37,7 +37,7 @@ class Book(Base):
     book_cover_image_url: Mapped[str] = mapped_column()
     category_id: Mapped[int] = mapped_column(ForeignKey("librery_system.category.id"))
     #relationship
-    Book: Mapped["Category"] = relationship(back_populates="book",uselist=False)
+    Category: Mapped["Category"] = relationship(back_populates="book",uselist=False)
     user: Mapped[list["Favorite"]] = relationship(back_populates="book")
 
 class Category(Base):
