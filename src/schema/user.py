@@ -5,3 +5,6 @@ class BaseUser(BaseModel):
     email: EmailStr
     password: str = Field(...,min_length=8,max_length=12)
 
+class ResponseUser(BaseModel):
+    name: str 
+    email: str 
