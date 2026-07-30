@@ -1,5 +1,9 @@
 from pydantic import BaseModel
-from src.schema.book import ResponseBook
+from src.schema.book import Book
 
 class ResponseFavorityBook(BaseModel):
-    favotite_book: list["ResponseBook"]
+    book_id: int
+
+class BaseFavorite(BaseModel):
+    user_id: int
+    book_id: int

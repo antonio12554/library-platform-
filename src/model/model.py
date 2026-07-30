@@ -13,7 +13,7 @@ class User(Base):
     hash_password: Mapped[str] = mapped_column()
     email: Mapped[str] = mapped_column(unique=True)
     #relationship
-    favorite_book: Mapped[list["Favorite"]] = relationship(back_populates="user")
+    favorite: Mapped[list["Favorite"]] = relationship(back_populates="user")
 
 class Favorite(Base):
     __tablename__ = "favorite"
@@ -21,6 +21,9 @@ class Favorite(Base):
 
     user_id: Mapped[int] = mapped_column(ForeignKey("librery_system.user.id"),primary_key=True)
     book_id: Mapped[int] = mapped_column(ForeignKey("librery_system.book.id"),primary_key=True)
+    #relationship
+    book: Mapped[list["Book"]] = relationship(back_populates="favorite")
+    user: Mapped["User"] = relationship(back_populates="favorite")
 
 class Book(Base):
     __tablename__ = "book"
@@ -37,8 +40,8 @@ class Book(Base):
     book_cover_image_url: Mapped[str] = mapped_column()
     category_id: Mapped[int] = mapped_column(ForeignKey("librery_system.category.id"))
     #relationship
-    Category: Mapped["Category"] = relationship(back_populates="book",uselist=False)
-    user: Mapped[list["Favorite"]] = relationship(back_populates="book")
+    category: Mapped["Category"] = relationship(back_populates="book",uselist=False)
+    favorite: Mapped[list["Favorite"]] = relationship(back_populates="book")
 
 class Category(Base):
     __tablename__ = "category"
@@ -46,6 +49,8 @@ class Category(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True,autoincrement=True)
     name: Mapped[str] = mapped_column()
+    #relatioship
+    book: Mapped["Book"] = relationship(back_populates="category",uselist=False)
 
 Base.metadata.create_all(Engine)
 
