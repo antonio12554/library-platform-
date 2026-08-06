@@ -8,7 +8,7 @@ from src.schema.user import BaseUser,ResponseUser
 #fastapi
 from fastapi import APIRouter,Depends
 #crud
-from src.crud.crud import create,read,read_by_id
+from src.crud.crud import create,read_by_id
 #auth
 from src.auth.segurity import create_hash_password
 
