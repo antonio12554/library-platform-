@@ -41,6 +41,7 @@ class Book(Base):
     category_id: Mapped[int] = mapped_column(ForeignKey("librery_system.category.id"))
     #relationship
     category: Mapped["Category"] = relationship(back_populates="book",uselist=False)
+    genre: Mapped[list["Genre"]] = relationship(back_populates="book")
     favorite: Mapped[list["Favorite"]] = relationship(back_populates="book")
 
 class Category(Base):
@@ -51,6 +52,18 @@ class Category(Base):
     name: Mapped[str] = mapped_column()
     #relatioship
     book: Mapped["Book"] = relationship(back_populates="category",uselist=False)
+
+class Genre(Base):
+    __tablename__ = "genre"
+    __table_args__ = {"schema":"librery_system"}
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    genre: Mapped[str] = mapped_column()
+    book_id: Mapped[int] = mapped_column(ForeignKey("librery_system.book.id"))
+    #relationship
+    book: Mapped[list["Book"]] = relationship(back_populates="genre")
+
+
 
 Base.metadata.create_all(Engine)
 
