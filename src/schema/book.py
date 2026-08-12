@@ -9,7 +9,7 @@ class Book(BaseModel):
     title: str 
     subtitle: str 
     author: str 
-    description: str = Field(...,max_length=200)
+    description: str = Field(...,max_length=400)
     pdf_url: str
     number_page: int
     created_at: str
