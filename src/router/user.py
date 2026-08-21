@@ -8,6 +8,7 @@ from src.schema.user import BaseUser,ResponseUser
 from src.schema.auth import BaseLogin
 #fastapi
 from fastapi import APIRouter,Depends, Header
+from fastapi.security import HTTPBearer,HTTPAuthorizationCredentials
 #crud
 from src.crud.crud import create,read_by_id,read_by_email
 #auth
@@ -26,14 +27,14 @@ def create_account(validate: BaseUser, db: Session = Depends(get_db)):
 @router.post("/login")
 def login(validate: BaseLogin, db: Session = Depends(get_db)):
     user = read_by_email(db, User, validate.email)
-    validate = validate_hash_password(validate.password, user.hash_password)
-    if validate:
-        access_token = generate_access_token(user.id)
-        return {"token":access_token}
+    authorization = validate_hash_password(validate.password, user.hash_password)
+    if authorization:
+        token = generate_access_token(user.id)
+        return token 
 
-@router.get("/profile")
-def prefile(user = Depends(get_current_token)):
-    return user
+@router.post("/prefire")
+def prefile(token = Depends(get_current_token)):
+    return token 
 
 
 

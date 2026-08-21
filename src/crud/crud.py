@@ -14,7 +14,7 @@ def read_by_id(db,object: object,id: int):
     return data
 
 def read_by_email(db, object: object, email: str):
-    data = db.query(object).filter(object.email == id).first()
+    data = db.query(object).filter(object.email == email).first()
     return data
 
 def delete(db,object: object):

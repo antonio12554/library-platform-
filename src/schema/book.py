@@ -1,8 +1,6 @@
 from pydantic import BaseModel, Field
-
-
-class Category(BaseModel):
-    name: str
+from src.schema.category import ResponseCategory
+from src.schema.genre import BaseGenre
 
 class Book(BaseModel):
     id: int
@@ -16,4 +14,5 @@ class Book(BaseModel):
     book_cover_image_url: str
 
 class ResponseBook(Book):
-    category: Category
+    category: ResponseCategory
+    genre: list["BaseGenre"]
